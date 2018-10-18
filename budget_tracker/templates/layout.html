@@ -1,2 +1,14 @@
 <!-- this will have all the heading stuff and whatnot for
 the HTML pages - basically a template -->
+ <!DOCTYPE html>
+ <html lang="en" dir="ltr">
+   <head>
+     <meta charset="utf-8">
+     <title>Budget Tracker - {{ title }}</title>
+   </head>
+   <body>
+     <!-- this is where the content of all the other
+     pages will go -->
+     {% block content %}{% endblock %}
+   </body>
+ </html>
