@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
-### Idea: put login on home page
+### TODO Idea: put login on home page
 @app.route("/")
 @app.route("/home")
 def home():
@@ -19,6 +19,7 @@ def register():
     # form = RegistrationForm()
     return None  # will eventually be render_template()
 
+# TODO should this also be the route of "/"?
 @app.route("/login")
 def login():
     # form = LoginForm()
