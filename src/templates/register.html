@@ -1,0 +1,18 @@
+<!--
+References used for this page:
+  - https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/03-Forms-and-Validation/templates/register.html
+-->
+
+<!-- This says that we are using layout.html as our basic layout -->
+{% extends "layout.html" %}
+<!-- This is where the content will go that is defined also in layout.html -->
+{% block content %}
+  <form>
+    <!-- TODO fill in registration form -->
+  </form>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Already have an account? <a class="ml-1" href="{{ url_for('login') }}">Sign in.</a> <!-- url_for() takes name of route ~function~ -->
+    </small>
+  </div>
+{% endblock content %}

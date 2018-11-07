@@ -1,14 +1,18 @@
 # This is the main Flask file for the budget tracker
 
 from flask import Flask, render_template, url_for
+from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
 
-### TODO Idea: put login on home page
+# TODO temporary secret key
+app.config['SECRET_KEY'] = '4c1b98566bb86432a39a8d5baa91d184'
+
 @app.route("/")
-@app.route("/home")
-def home():
-    return render_template('home.html', title='Login')
+@app.route("/login")
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Login', form=form)
 
 @app.route("/about")
 def about():
@@ -16,13 +20,11 @@ def about():
 
 @app.route("/register")
 def register():
-    # form = RegistrationForm()
-    return None  # will eventually be render_template()
+    form = RegistrationForm()
+    return render_template('register.html', title='Register', form=form)
 
-# TODO should this also be the route of "/"?
-@app.route("/login")
-def login():
-    # form = LoginForm()
+@app.route("/home")
+def home():
     return None  # will eventually be render_template()
 
 

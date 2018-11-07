@@ -1,6 +1,6 @@
 /*
-Got the sticky footer style here:
-https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/
+Source:
+  - https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/
 */
 .footer {
   position: absolute;
@@ -13,8 +13,8 @@ https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/
 }
 
 /*
-Got the forms styles here:
-https://getbootstrap.com/docs/4.0/examples/sign-in/
+Source:
+  - https://getbootstrap.com/docs/4.0/examples/sign-in/
 */
 .form-signin {
   width: 100%;
