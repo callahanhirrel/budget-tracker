@@ -36,16 +36,27 @@ references used for this page:
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <button type="button" class="btn btn-dark">Login</button>
+            <button type="button" class="btn btn-dark" href="{{ url_for('login') }}">Login</button>
           </li>
         </ul>
       </div>
      </nav>
 
-     <!-- content of other pages will be filled in here -->
-     <main role="main" class="container">
-      {% block content %}{% endblock %}
-     </main>
+
+    <main role="main" class="container">
+       {% with message = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+       {% endwith %} <!-- this whole nested block allows us to specify Flashed messages -->
+
+       <!-- content of other pages will be filled in here -->
+       {% block content %}{% endblock %}
+    </main>
 
     <footer class="footer">
       <div class="container">
