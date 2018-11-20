@@ -1,6 +1,6 @@
-# TODO from models.py import models
 from flask import render_template, url_for, flash, redirect
-from src import app
+from flask import get_flashed_messages
+from src import app, db, bcrypt
 from src.forms import RegistrationForm, LoginForm
 from src.models import User
 
@@ -23,8 +23,12 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_pw)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Account created for {form.first_name.data} {form.last_name.data}.', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/home")
