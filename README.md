@@ -1,5 +1,5 @@
-# budget-tracker
-A Flask application designed for real time tracking of budgets and funding for college/university academic departments.
+# BIRT: Budgets In Real Time
+A [Flask](http://flask.pocoo.org/) application designed for real time tracking of budgets and funding for college/university academic departments.
 
 This application is primarily intended to be used by administrative assistants, department chairs, and department professors.
 
