@@ -1,26 +1,35 @@
-from flask import render_template, url_for, flash, redirect
-from flask import get_flashed_messages
+from flask import render_template, url_for, flash, redirect, request
 from src import app, db, bcrypt
 from src.forms import RegistrationForm, LoginForm
 from src.models import User
+from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        # TODO if email/password combination matches that of a user:
-        flash(f'Successfully logged in!', 'success')
-        return redirect(url_for('home'))
-        # TODO else, flash('Login unsuccessful. Please check username and password', 'danger')
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next = request.args.get('next')
+            # Fancy ternary conditional in our return statement
+            return redirect(next) if next else redirect(url_for('home'))
+        else:
+            flash('Login was unsuccessful. Please check email and password and try again.', 'danger')
     return render_template('login.html', title='Login', form=form)
 
+# TODO
 @app.route("/about")
 def about():
     return None  # will eventually be render_template()
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -32,5 +41,12 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/home")
+@login_required
 def home():
-    return None  # will eventually be render_template()
+    return render_template('home.html', title='Home')
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    # Since the login page serves as the `main` page, we will redirect there upon logout.
+    return redirect(url_for('login'))
