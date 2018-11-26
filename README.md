@@ -17,17 +17,29 @@ Other long term goals include development of an API and mobile-frontend to allow
 
 ## Installing 
 
-To install and work on this application, simply clone the repository and install the dependencies. You can use `pip` for the latter. From the application root directory, use the command
+Before installing, I recommend activating a [virtual environment](https://pythontips.com/2013/07/30/what-is-virtualenv/) of some sort, solely for this application. The virtual environment tool I use is called `virtualenv`, which can be installed with `pip install virtualenv`. Then, you can create and activate your virtual environment with
+```
+virtualenv environment_name
+source environment_name/bin/activate
+```
+Then, you can deactivate the virtual enironment with
+```
+deactivate
+```
+
+Once you have a virtual environment installed, you can install and work on this application. To do so, simply clone the repository and install the dependencies. You can use `pip` for the latter. From the application root directory, use the command
 ```
 pip install -r requirements.txt
 ```
 
 ## Running
 
-You can run the application in one of two ways. The simpler is to navigate to the application root directory, then use the command
+You can run the application in one of two ways. The simpler method is to navigate to the application root directory, then use the command
 ```
 python run.py
 ```
+This will run the application as a Python module instead of a Flask application. It is easier for development, in my opinion.
+
 Alternatively, if you are using virtual environments, from within your virtual environment, set the `FLASK_APP` environment variable to the `src` directory:
 ```
 export FLASK_APP=src
