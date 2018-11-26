@@ -50,3 +50,11 @@ Source:
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+/*
+Source:
+  - https://stackoverflow.com/a/27882870
+*/
+.prof-img {
+    image-orientation: from-image;
+}

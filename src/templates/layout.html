@@ -39,9 +39,12 @@ references used for this page:
             <!-- The program seems to get unhappy when these are buttons instead of anchor tags... -->
             <!-- Issue #1 details this further -->
             {% if current_user.is_authenticated %}
+              <a class="nav-item nav-link" href="{{ url_for('account') }}">My Account</a>
               <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
             {% else %}
               <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+              <!-- This register link is only for testing, and will probably be removed for deployment -->
+              <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
             {% endif %}
           </li>
         </ul>

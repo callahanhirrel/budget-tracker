@@ -3,6 +3,9 @@ from src import app, db, bcrypt
 from src.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from src.models import User
 from flask_login import login_user, current_user, logout_user, login_required
+import secrets
+import os
+from PIL import Image
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/login", methods=['GET', 'POST'])
@@ -45,6 +48,19 @@ def register():
 def home():
     return render_template('home.html', title='Budgets in Real Time Home')
 
+# This function is used to update a user's profile image.
+# Returns the new random-hex-ified profile image filename
+def save_img(form_img):
+    random_hex = secrets.token_hex(8)
+    _, file_ext = os.path.splitext(form_img.filename)  # use '_' as a variable name since we aaren't using the variable
+    new_img_filename = random_hex + file_ext
+    img_path = os.path.join(app.root_path, 'static/profile_pictures', new_img_filename)
+    output_size = (125, 125)
+    img = Image.open(form_img)
+    img.thumbnail(output_size)
+    img.save(img_path)
+    return new_img_filename
+
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
@@ -52,6 +68,9 @@ def account():
     img_file = url_for('static', filename=f'profile_pictures/{current_user.img_file}')
     form = UpdateAccountForm()
     if form.validate_on_submit():
+        if form.img.data:
+            new_img_file = save_img(form.img.data)
+            current_user.img_file = new_img_file
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
         current_user.email = form.email.data
