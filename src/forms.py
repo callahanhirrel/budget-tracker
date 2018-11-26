@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from src.models import User
 from flask_login import current_user
@@ -41,3 +41,8 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:  # i.e. if user <> None
                 raise ValidationError('Email already in use. Please choose a different email.')
+
+class RequestForm(FlaskForm):
+    requester_name = StringField('Your name', validators=[DataRequired()])
+    text = StringField('Description', validators=[DataRequired()])
+    amount = DecimalField('Request amount', validators=[DataRequired()])
