@@ -24,8 +24,8 @@ class User(db.Model, UserMixin):
     img_file = db.Column(db.String(100), nullable=False, default='default-user-icon.jpg')
     occupation = db.Column(db.String(30), nullable=False)       # professor, administrator, etc...
     department = db.Column(db.Enum(Departments), nullable=False)
-    is_dept_chair = db.Column(db.Boolean(), nullable=False, default=False)
-    # requests = ???
+    is_dept_chair = db.Column(db.Boolean, nullable=False, default=False)
+    requests = db.relationship('Request', backref='requester', lazy=True)
 
     # TODO relationships:
     #   rltshp = db.relationship('className', backref='reference in other table', lazy=True)
@@ -36,27 +36,28 @@ class User(db.Model, UserMixin):
 
 # BudgetReport ~one -> many~ BudgetReportEntry
 class BudgetReportEntry(db.Model):
-    obj_code = db.Column(db.Integer(), primary_key=True)
+    obj_code = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(50), nullable=False)
     original_budget = db.Column(db.Float(asdecimal=True), nullable=True)
     revised_budget = db.Column(db.Float(asdecimal=True), nullable=False)
     encumbered_amounts = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
     mtd_activity = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
     ytd_activity = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
+    #parent_report = db.Column(db.Integer, db.ForeignKey('budgetreport.id'), nullable=False)
 
 # BudgetReport ~one -> many~ BudgetReportEntry
 class BudgetReport(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     department = db.Column(db.Enum(Departments), nullable=False)
-    dept_code = db.Column(db.Integer(), nullable=False)
-    date = db.Column(db.Date(), nullable=False)
-    # entries = ???
+    dept_code = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
+    #entries = db.relationship('BudgetReportEntry', backref='report', lazy=True)
 
 # User ~one -> zero or more~ Request
 class Request(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    obj_code = db.Column(db.Integer(), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    obj_code = db.Column(db.Integer, nullable=False)
     class_name = db.Column(db.String(20), nullable=False)
     class_code = db.Column(db.Integer(), nullable=False)
     request_text = db.Column(db.String(150), nullable=False)
-    # user_id as foreign key
+    who_requested = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
