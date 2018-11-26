@@ -1,4 +1,4 @@
-# BIRT: Budgets In Real Time
+# BiRT: Budgets in Real Time
 
 ## Description
 
