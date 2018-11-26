@@ -17,7 +17,7 @@ Other long term goals include development of an API and mobile-frontend to allow
 
 ## Installing 
 
-Before installing, I recommend activating a [virtual environment](https://pythontips.com/2013/07/30/what-is-virtualenv/) of some sort, solely for this application. The virtual environment tool I use is called `virtualenv`, which can be installed with `pip install virtualenv`. Then, you can create and activate your virtual environment with
+Before installing, I recommend activating a [virtual environment](https://pythontips.com/2013/07/30/what-is-virtualenv/) of some sort, solely for this application. The virtual environment tool I use is called [`virtualenv`](https://virtualenv.pypa.io/en/latest/), which can be installed with `pip install virtualenv`. Then, you can create and activate your virtual environment with
 ```
 virtualenv environment_name
 source environment_name/bin/activate
