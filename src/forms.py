@@ -10,14 +10,14 @@ class RegistrationForm(FlaskForm):
     last_name = StringField('Last name', validators=[DataRequired(), Length(min=1, max=50)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     occupation = StringField('Occupation', validators=[DataRequired()])
-    department = SelectField('Department', validators=[DataRequired()], choices=['PSYCH', 'BIO', 'ADMIN'])
-    is_dept_chair = BooleanField('Check registree is department chair')
+    department = SelectField('Department', choices=[('psy', 'PSYCH'), ('bio', 'BIO'), ('adm', 'ADMIN')])
+    is_dept_chair = BooleanField('Check if registree is department chair')
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user = User.query.filter_by(email=email.data.lower()).first()
         if user:  # i.e. if user != None
             raise ValidationError('Email already in use. Please choose a different email.')
 
@@ -38,7 +38,7 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     img = FileField('Update profile picture', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     occupation = StringField('Occupation', validators=[DataRequired()])
-    department = SelectField('Department', validators=[DataRequired()], choices=['PSYCH', 'BIO', 'ADMIN'])
+    department = SelectField('Department', choices=[('psy', 'PSYCH'), ('bio', 'BIO'), ('adm', 'ADMIN')])
     is_dept_chair = BooleanField('Check if you are the department chair')
     submit = SubmitField('Update')
 

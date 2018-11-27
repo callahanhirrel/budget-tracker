@@ -83,23 +83,13 @@ References used for this page:
       <!-- Department -->
       <div class="form-group">
         {{ form.department.label(class="form-control-label") }}
-
-        <!-- This block handles invalid user input -->
-        {% if form.department.errors %}
-          {{ form.department(class="form-control form-control-lg is-invalid") }}
-          <div class="invalid-feedback">
-            {% for error in form.department.errors %}
-              <span>{{ error }}</span>
-            {% endfor %}
-          </div>
-        {% else %}
-          {{ form.department(class="form-control form-control-lg") }}
-        {% endif %}
+        {{ form.department(class="form-control form-control-lg") }}
       </div>
 
       <!-- Is Department Chair -->
       <div class="form-group">
         {{ form.is_dept_chair.label(class="form-control-label") }}
+        {{ form.is_dept_chair(class="form-control") }}
       </div>
 
       <!-- Password -->
@@ -141,7 +131,7 @@ References used for this page:
     <div class="form-group">
       {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
     </div>
-    
+
   </form>
   <div class="border-top pt-3">
     <small class="text-muted">

@@ -9,9 +9,9 @@ def load_user(user_id):
 
 # We will use this enum to represent departments in the database
 class Departments(enum.Enum):
-    bio = 'BIO'
-    psych = 'PSYCH'
-    admin = 'ADMIN'
+    bio = 'bio'
+    psych = 'psy'
+    admin = 'adm'
 
 # We want to inherit from both the database model and our login manager's UserMixin class
 # User ~one -> zero or more~ Request
@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)         # 60 characters due to hashing
     img_file = db.Column(db.String(100), nullable=False, default='default-user-icon.jpg')
     occupation = db.Column(db.String(30), nullable=False)       # professor, administrator, etc...
-    department = db.Column(db.Enum(Departments), nullable=False)
+    department = db.Column(db.String(3), nullable=False)        # psy, bio, or adm
     is_dept_chair = db.Column(db.Boolean, nullable=False, default=False)
     requests = db.relationship('Request', backref='requester', lazy=True)
 
@@ -43,7 +43,6 @@ class BudgetReportEntry(db.Model):
     encumbered_amounts = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
     mtd_activity = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
     ytd_activity = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
-    #parent_report = db.Column(db.Integer, db.ForeignKey('budgetreport.id'), nullable=False)
 
 # BudgetReport ~one -> many~ BudgetReportEntry
 class BudgetReport(db.Model):
@@ -51,7 +50,6 @@ class BudgetReport(db.Model):
     department = db.Column(db.Enum(Departments), nullable=False)
     dept_code = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
-    #entries = db.relationship('BudgetReportEntry', backref='report', lazy=True)
 
 # User ~one -> zero or more~ Request
 class Request(db.Model):
@@ -60,4 +58,4 @@ class Request(db.Model):
     class_name = db.Column(db.String(20), nullable=False)
     class_code = db.Column(db.Integer(), nullable=False)
     request_text = db.Column(db.String(150), nullable=False)
-    who_requested = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

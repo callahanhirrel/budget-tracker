@@ -36,7 +36,9 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_pw)
+        user = User(first_name=form.first_name.data, last_name=form.last_name.data,
+                    email=form.email.data.lower(), password=hashed_pw, occupation=form.occupation.data,
+                    department=form.department.data, is_dept_chair=form.is_dept_chair.data)
         db.session.add(user)
         db.session.commit()
         flash(f'Account created for {form.first_name.data} {form.last_name.data}.', 'success')
@@ -52,7 +54,7 @@ def home():
 # Returns the new random-hex-ified profile image filename
 def save_img(form_img):
     random_hex = secrets.token_hex(8)
-    _, file_ext = os.path.splitext(form_img.filename)  # use '_' as a variable name since we aaren't using the variable
+    _, file_ext = os.path.splitext(form_img.filename)  # use '_' as a variable name since we aren't using the variable
     new_img_filename = random_hex + file_ext
     img_path = os.path.join(app.root_path, 'static/profile_pictures', new_img_filename)
     output_size = (125, 125)
@@ -73,7 +75,7 @@ def account():
             current_user.img_file = new_img_file
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
-        current_user.email = form.email.data
+        current_user.email = form.email.data.lower()
         db.session.commit()
         flash('Account successfully updated.', 'success')
         return redirect(url_for('account'))
@@ -81,6 +83,9 @@ def account():
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
+        form.department.data = current_user.department
+        form.occupation.data = current_user.occupation
+        form.is_dept_chair.data = current_user.is_dept_chair
     return render_template('account.html', title='My Account', form=form, img_file=img_file)
 
 @app.route("/logout")
