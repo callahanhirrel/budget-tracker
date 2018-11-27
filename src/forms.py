@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from src.models import User
 from flask_login import current_user
@@ -9,6 +9,9 @@ class RegistrationForm(FlaskForm):
     first_name = StringField('First name', validators=[DataRequired(), Length(min=1, max=50)])
     last_name = StringField('Last name', validators=[DataRequired(), Length(min=1, max=50)])
     email = StringField('Email', validators=[DataRequired(), Email()])
+    occupation = StringField('Occupation', validators=[DataRequired()])
+    department = SelectField('Department', validators=[DataRequired()], choices=['PSYCH', 'BIO', 'ADMIN'])
+    is_dept_chair = BooleanField('Check registree is department chair')
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
@@ -34,6 +37,9 @@ class UpdateAccountForm(FlaskForm):
     last_name = StringField('Last name', validators=[DataRequired(), Length(min=1, max=50)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     img = FileField('Update profile picture', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    occupation = StringField('Occupation', validators=[DataRequired()])
+    department = SelectField('Department', validators=[DataRequired()], choices=['PSYCH', 'BIO', 'ADMIN'])
+    is_dept_chair = BooleanField('Check if you are the department chair')
     submit = SubmitField('Update')
 
     def validate_email(self, email):
