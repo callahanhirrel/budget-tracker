@@ -66,7 +66,6 @@ def save_img(form_img):
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    # TODO fix this snarky lil bug (Issue #5)
     img_file = url_for('static', filename=f'profile_pictures/{current_user.img_file}')
     form = UpdateAccountForm()
     if form.validate_on_submit():
