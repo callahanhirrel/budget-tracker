@@ -1,0 +1,19 @@
+** created this text file to keep the user stories up to date **
+
+We will define users as the administrative assistant, the department chairs, and the department professors (of the Hendrix College Psychology and Biology departments).
+
+As a user, I want to:
+• view funding distribution for my department in real time in my Web browser
+• use keywords to search a database of budget data and retrieve information
+• sort budget data by specific fields
+• show and hide specific fields of budget data
+• view archived past budget data to make predictions and be prepared for cyclic expenses
+• view this data in a mobile application connected to the budget database over a network
+
+As an administrative assistant, I additionally want to: • add, edit, or remove specific entries of data
+• add new fields or categories for data
+• create new tables for tracking new grants
+• maintain the budget database simply and intuitively
+
+As a professor, I additionally want to:
+• view my classes expenses, including class name/code, purchase, and amount, to plan and prepare

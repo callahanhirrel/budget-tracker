@@ -48,6 +48,8 @@ def register():
 @app.route("/home")
 @login_required
 def home():
+    # data = DataClassName.query.all()
+    # do this to get all the budget data from the database and have it in a variable
     return render_template('home.html', title='Budgets in Real Time Home')
 
 # This function is used to update a user's profile image.

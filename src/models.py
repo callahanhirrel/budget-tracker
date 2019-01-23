@@ -34,8 +34,8 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.last_name}', '{self.first_name}', '{self.email}')"
 
-# BudgetReport ~one -> many~ BudgetReportEntry
-class BudgetReportEntry(db.Model):
+# MonthlyBudgetReport ~one -> many~ MonthlyBudgetReportEntry
+class MonthlyBudgetReportEntry(db.Model):
     obj_code = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(50), nullable=False)
     original_budget = db.Column(db.Float(asdecimal=True), nullable=True)
@@ -44,12 +44,13 @@ class BudgetReportEntry(db.Model):
     mtd_activity = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
     ytd_activity = db.Column(db.Float(asdecimal=True), nullable=False, default=0)
 
-# BudgetReport ~one -> many~ BudgetReportEntry
-class BudgetReport(db.Model):
+# MonthlyBudgetReport ~one -> many~ MonthlyBudgetReportEntry
+class MonthlyBudgetReport(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     department = db.Column(db.Enum(Departments), nullable=False)
     dept_code = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
+    entries = db.relationship('MonthlyBudgetReportEntry', backref='parent_report', lazy=True)
 
 # User ~one -> zero or more~ Request
 class Request(db.Model):
@@ -57,5 +58,6 @@ class Request(db.Model):
     obj_code = db.Column(db.Integer, nullable=False)
     class_name = db.Column(db.String(20), nullable=False)
     class_code = db.Column(db.Integer(), nullable=False)
-    request_text = db.Column(db.String(150), nullable=False)
+    text = db.Column(db.String(150), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
