@@ -4,13 +4,15 @@ We will define users as the administrative assistant, the department chairs, and
 
 As a user, I want to:
 • view funding distribution for my department in real time in my Web browser
+• view table of my grants, how much has been spent and on what, how much is remaining
 • use keywords to search a database of budget data and retrieve information
 • sort budget data by specific fields
 • show and hide specific fields of budget data
 • view archived past budget data to make predictions and be prepared for cyclic expenses
 • view this data in a mobile application connected to the budget database over a network
 
-As an administrative assistant, I additionally want to: • add, edit, or remove specific entries of data
+As an administrator, I additionally want to: 
+• add, edit, or remove specific entries of data
 • add new fields or categories for data
 • create new tables for tracking new grants
 • maintain the budget database simply and intuitively

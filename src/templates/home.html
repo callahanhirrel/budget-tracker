@@ -3,4 +3,29 @@
 <!-- This is where the content will go that is defined also in layout.html -->
 {% block content %}
 
+<div class="content-section">
+  <h3> Home Page for <!-- {{ current_user.first_name }} {{ current_user.last_name }} --> Nora Simmons </h3>
+  <div>
+    You are currently viewing:
+    <div class="row">
+      <div class="col-sm-4">
+        <select>
+          <option value="psy">PSYCH Department Budget</option>
+          <option value="bio">BIO Department Budget</option>
+          <option value="mellon">Mellon Grant</option>
+          <option value="other">Some other grant</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <button type="button">Search Table</button>
+      </div>
+      <div class="col-sm-4">
+        Total Available Balance: $$$
+      </div>
+    </div>
+  </div>
+</div>
+<div class="table-responsive">
+  {{ table }}
+</div>
 {% endblock content %}

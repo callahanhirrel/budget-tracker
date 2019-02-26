@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from src import app, db, bcrypt
 from src.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from src.models import User
+from src.tables import BudgetTable
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os
@@ -46,11 +47,15 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/home")
-@login_required
+#@login_required
 def home():
     # data = DataClassName.query.all()
     # do this to get all the budget data from the database and have it in a variable
-    return render_template('home.html', title='Budgets in Real Time Home')
+    
+    # Dummy data for the table:
+    items = [dict(date=None, fac_name='Description1',acct_code='', class_code='', amt_expensed='', amt_remaining='', description='')]
+    table = BudgetTable(items)
+    return render_template('home.html', title='Budgets in Real Time Home', table=table)
 
 # This function is used to update a user's profile image.
 # Returns the new random-hex-ified profile image filename
