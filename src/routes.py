@@ -47,11 +47,12 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/home")
+# TODO uncomment this after testing:
 #@login_required
 def home():
     # data = DataClassName.query.all()
     # do this to get all the budget data from the database and have it in a variable
-    
+
     # Dummy data for the table:
     items = [dict(date=None, fac_name='Description1',acct_code='', class_code='', amt_expensed='', amt_remaining='', description='')]
     table = BudgetTable(items)

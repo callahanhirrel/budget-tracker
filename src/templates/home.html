@@ -17,7 +17,7 @@
         </select>
       </div>
       <div class="col-sm-4">
-        <button type="button">Search Table</button>
+        <button type="button" class="btn">Search Table</button>
       </div>
       <div class="col-sm-4">
         Total Available Balance: $$$
@@ -28,4 +28,6 @@
 <div class="table-responsive">
   {{ table }}
 </div>
+
+<script src="{{url_for('static', filename='sortTable.js')}}"></script>
 {% endblock content %}

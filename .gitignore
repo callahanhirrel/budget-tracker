@@ -2,3 +2,4 @@
 __pycache__/
 profile_pictures/
 site.db
+*.pyc
