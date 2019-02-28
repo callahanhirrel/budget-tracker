@@ -58,3 +58,11 @@ Source:
 .prof-img {
     image-orientation: from-image;
 }
+
+/*
+Source:
+  - https://www.w3schools.com/cssref/pr_class_cursor.asp
+*/
+.cursor-pointer {
+  cursor: pointer;
+}

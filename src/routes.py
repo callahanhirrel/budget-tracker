@@ -54,7 +54,11 @@ def home():
     # do this to get all the budget data from the database and have it in a variable
 
     # Dummy data for the table:
-    items = [dict(date=None, fac_name='Description1',acct_code='', class_code='', amt_expensed='', amt_remaining='', description='')]
+    items = [
+        dict(date=None, fac_name='Taylor, Sara',acct_code='', class_code='PSYCH110', amt_expensed='', amt_remaining='', description=''),
+        dict(date=None, fac_name='Kennedy, Lindsey',acct_code='', class_code='PSYCH350', amt_expensed='', amt_remaining='', description=''),
+        dict(date=None, fac_name='Zorwick, Leslie',acct_code='', class_code='PSYCH270', amt_expensed='', amt_remaining='', description='')
+    ]
     table = BudgetTable(items)
     return render_template('home.html', title='Budgets in Real Time Home', table=table)
 
