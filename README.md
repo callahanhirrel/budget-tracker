@@ -19,36 +19,40 @@ Other long term goals include development of an API and mobile-frontend to allow
 
 Before installing, I recommend activating a [virtual environment](https://pythontips.com/2013/07/30/what-is-virtualenv/) of some sort, solely for this application. The virtual environment tool I use is called [`virtualenv`](https://virtualenv.pypa.io/en/latest/), which can be installed with `pip install virtualenv`. Then, you can create and activate your virtual environment with
 ```
-virtualenv environment_name
-source environment_name/bin/activate
+$ virtualenv environment_name
+$ source environment_name/bin/activate
 ```
 Then, you can deactivate the virtual enironment with
 ```
-deactivate
+$ deactivate
 ```
 
-Once you have a virtual environment installed, you can install and work on this application. To do so, simply clone the repository and install the dependencies. You can use `pip` for the latter. From the application root directory, use the command
+Once you have a virtual environment installed, you can install and work on this application. To do so, simply clone the repository and run the `src/setup.py` script:
 ```
-pip install -r requirements.txt
+$ python setup.py install
+```
+or
+```
+$ python setup.py develop
 ```
 
 ## Running
 
 You can run the application in one of two ways. The simpler method is to navigate to the application root directory, then use the command
 ```
-python run.py
+$ python run.py
 ```
 This will run the application as a Python module instead of a Flask application. It is easier for development, in my opinion.
 
 Alternatively, if you are using virtual environments, from within your virtual environment, set the `FLASK_APP` environment variable to the `src` directory:
 ```
-export FLASK_APP=src
+$ export FLASK_APP=budget_app
 ```
 Then, use
 ```
-flask run
+$ flask run
 ```
 Note, that using `flask run` will not run the application in debug mode. To do this, use
 ```
-FLASK_DEBUG=1 flask run
+$ FLASK_DEBUG=1 flask run
 ```
