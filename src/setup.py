@@ -2,12 +2,16 @@
 
 from setuptools import setup, find_packages
 
-readme = open("README.md", "r")
+readme = open("../README.md", "r")
 long_description = readme.read()
 readme.close()
 
+req_file = open("requirements.txt", "r")
+requirements = req_file.read().split("\n")[:-1]
+req_file.close()
+
 setup(
-    name="BiRT - Budgets in Real Time",
+    name="BudgetApp",
     version="0.0",
     author="Callahan Hirrel",
     author_email="callahan.hirrel@gmail.com",
@@ -16,4 +20,8 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/callahanhirrel/budget-tracker",
     packages=find_packages(),
+    include_package_data=True,
+    install_requires=requirements,
+    zip_safe=False,
+    license="GNU GPL",
 )

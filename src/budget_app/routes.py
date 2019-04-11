@@ -1,8 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request
-from src import app, db, bcrypt
-from src.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from src.models import User
-from src.tables import BudgetTable
+from budget_app import app, db, bcrypt
+from budget_app.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from budget_app.models import User
+from budget_app.tables import BudgetTable
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
 import os

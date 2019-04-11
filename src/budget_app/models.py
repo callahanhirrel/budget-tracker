@@ -1,4 +1,4 @@
-from src import db, login_manager
+from budget_app import db, login_manager
 from flask_login import UserMixin
 import enum
 

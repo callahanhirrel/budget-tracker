@@ -21,4 +21,4 @@ login_manager.login_view = 'login'  # Function name of login route
 login_manager.login_message_category = 'info'
 
 # Put this down here to avoid circular import issues
-from src import routes
+from budget_app import routes

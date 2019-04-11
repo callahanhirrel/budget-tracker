@@ -1,0 +1,2 @@
+recursive-include budget_app/templates *
+recursive-include budget_app/static *

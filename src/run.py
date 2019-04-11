@@ -1,4 +1,4 @@
-from src import app
+from budget_app import app
 
 # We include this conditional so we can run this script
 # directly using Python if we wish, as opposed to using
