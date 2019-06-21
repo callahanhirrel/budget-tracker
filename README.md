@@ -46,7 +46,7 @@ This will run the application as a Python module instead of a Flask application.
 
 Alternatively, if you are using virtual environments, from within your virtual environment, set the `FLASK_APP` environment variable to the `src` directory:
 ```
-$ export FLASK_APP=budget_app
+$ export FLASK_APP=src
 ```
 Then, use
 ```
